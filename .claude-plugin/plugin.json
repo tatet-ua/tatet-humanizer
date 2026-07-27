@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "tatet-humanizer",
+  "description": "Текст українською без ознак машинної генерації: символи, яких немає на клавіатурі, службова розмітка чат-інтерфейсів і 33 мовні патерни. Похідна від blader/humanizer з правилами тире, лапок і дефісів, виправленими під українську.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Tatet",
+    "url": "https://github.com/tatet-ua"
+  },
+  "homepage": "https://github.com/tatet-ua/tatet-humanizer",
+  "repository": "https://github.com/tatet-ua/tatet-humanizer",
+  "license": "MIT",
+  "keywords": [
+    "writing",
+    "editing",
+    "ai-detection",
+    "humanize",
+    "ukrainian",
+    "typography",
+    "prose"
+  ]
+}

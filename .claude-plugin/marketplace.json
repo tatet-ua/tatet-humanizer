@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace-manifest.json",
+  "name": "tatet-humanizer",
+  "owner": {
+    "name": "Tatet",
+    "url": "https://github.com/tatet-ua"
+  },
+  "description": "Скіл tatet-humanizer, встановлюваний як плагін Claude Code.",
+  "plugins": [
+    {
+      "name": "tatet-humanizer",
+      "source": "./",
+      "description": "Текст українською без ознак машинної генерації: символи, службова розмітка чат-інтерфейсів і 33 мовні патерни.",
+      "license": "MIT",
+      "keywords": [
+        "writing",
+        "editing",
+        "ai-detection",
+        "humanize",
+        "ukrainian",
+        "typography",
+        "prose"
+      ]
+    }
+  ]
+}
