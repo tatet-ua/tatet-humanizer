@@ -207,7 +207,7 @@ const MARKER = /tatet-humanizer|plain-text-output|Signs of AI writing/;
 const DOCS = [
   'SKILL.md', 'references/symbols.md', 'references/patterns.md',
   'README.md', 'AGENTS.md',
-  'claude-code/INSTALL.md', 'claude-code/CLAUDE.snippet.md',
+  'claude-code/INSTALL.md', 'rules-snippet.md',
 ];
 let markerFails = 0;
 for (const f of DOCS) {

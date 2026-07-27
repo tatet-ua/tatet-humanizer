@@ -1,7 +1,12 @@
 # tatet-humanizer
 
-Скіл для Claude Code: український текст без ознак машинної генерації.
-Внутрішній стандарт Tatet.
+Агентний скіл: український текст без ознак машинної генерації.
+
+*An agent skill that strips machine-generation tells from Ukrainian text:
+characters unavailable on a keyboard and sentence patterns typical of LLMs.
+Derived from [blader/humanizer](https://github.com/blader/humanizer),
+adapted for Ukrainian grammar and typography. Documentation is in
+Ukrainian.*
 
 Проблема проста. Модель ставить символи, яких немає на клавіатурі, і будує
 речення за впізнаваними шаблонами. Читач цього не аналізує, але відчуває.
@@ -13,28 +18,56 @@
 
 ## Установлення
 
-Глобально в усі проєкти:
+Скіл написаний у стандартному форматі Agent Skills, тому працює в будь-якому
+харнесі, що його підтримує. Найпростіший спосіб для всіх:
 
 ```bash
 npx skills add tatet-ua/tatet-humanizer --global
 ```
 
-Як плагін Claude Code:
+Перевірено: CLI розпізнає Codex, Cursor, Gemini CLI, OpenCode, Kimi Code CLI
+та ще з десяток агентів і розкладає файли по їхніх теках сам. Claude Code
+підключається симлінком.
+
+У конкретний проєкт, а не глобально:
+
+```bash
+npx skills add tatet-ua/tatet-humanizer
+```
+
+Файли лягають у `.agents/skills/tatet-humanizer/`. Цей шлях читають
+Antigravity, Codex і решта агентів, що дотримуються специфікації.
+
+### Окремі харнеси
+
+**Claude Code**, як плагін із маніфестами:
 
 ```
 /plugin marketplace add tatet-ua/tatet-humanizer
 ```
 
-Вручну, якщо перші два способи недоступні:
+**Antigravity**, глобально для всіх воркспейсів: покласти теку в
+`~/.gemini/config/skills/tatet-humanizer/`.
+
+**Вручну**, якщо CLI недоступний:
 
 ```bash
 git clone https://github.com/tatet-ua/tatet-humanizer.git
-mkdir -p ~/.claude/skills/tatet-humanizer
-cp tatet-humanizer/SKILL.md ~/.claude/skills/tatet-humanizer/
-cp -r tatet-humanizer/references ~/.claude/skills/tatet-humanizer/
+mkdir -p <тека-скілів-вашого-агента>/tatet-humanizer
+cp -r tatet-humanizer/SKILL.md tatet-humanizer/references <тека>/tatet-humanizer/
 ```
 
 Теку `references/` копіювати обов'язково, інакше скіл не знайде довідники.
+
+### Що працює не скрізь
+
+Хук автоматичної перевірки (`claude-code/hooks/`) використовує подію
+`PostToolUse`, яка є лише в Claude Code і Cline. В інших харнесах скіл
+працює як набір правил: перевіряє сам агент, автоматичного контролю після
+запису файлу немає.
+
+Решта, тобто самі правила, довідники й механіка застосування, від харнеса
+не залежить.
 
 ## Використання
 
@@ -62,7 +95,7 @@ cp -r tatet-humanizer/references ~/.claude/skills/tatet-humanizer/
 
 | Рівень | Що робить | Чого не покриває |
 |---|---|---|
-| Розділ у `CLAUDE.md` | діє в кожній сесії без виклику | може потонути в контексті довгої сесії |
+| Розділ у файлі правил | діє в кожній сесії без виклику | може потонути в контексті довгої сесії |
 | Скіл проєкту | повний довідник на вимогу | залежить від тригерів |
 | Хук `PostToolUse` | після кожного запису перевіряє файл і повертає зауваження моделі | не бачить текст у відповідях чату |
 
@@ -76,13 +109,15 @@ cp -r tatet-humanizer/references ~/.claude/skills/tatet-humanizer/
 | [SKILL.md](SKILL.md) | сам скіл, джерело правди |
 | [references/symbols.md](references/symbols.md) | коди символів, HTML-сутності, команди пошуку |
 | [references/patterns.md](references/patterns.md) | 33 мовні патерни з прикладами, хибні спрацювання, ознаки живого тексту |
-| [claude-code/](claude-code/INSTALL.md) | хук, розділ для `CLAUDE.md`, налаштування, інструкція |
+| [rules-snippet.md](rules-snippet.md) | розділ для `CLAUDE.md`, `AGENTS.md` чи іншого файлу правил |
+| [claude-code/](claude-code/INSTALL.md) | хук `PostToolUse`, налаштування, інструкція (Claude Code і Cline) |
 | [AGENTS.md](AGENTS.md) | контракт для тих, хто правитиме репозиторій |
 | [scripts/validate.mjs](scripts/validate.mjs) | перевірки узгодженості перед публікацією |
 
-Інструментів поза Claude Code немає навмисно: перевірку робить сам агент
+Окремих інструментів для людей немає навмисно: перевірку робить сам агент
 за правилами скіла, а в проєктах із хуком ще й автоматично після кожного
-запису файлу.
+запису файлу. Усе, що специфічне для одного харнеса, лежить у теці
+`claude-code/`; решта портативна.
 
 ## Співвідношення з blader/humanizer
 
