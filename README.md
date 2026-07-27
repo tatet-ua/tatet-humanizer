@@ -112,7 +112,7 @@ cp -r tatet-humanizer/SKILL.md tatet-humanizer/references <тека>/tatet-human
 | [rules-snippet.md](rules-snippet.md) | розділ для `CLAUDE.md`, `AGENTS.md` чи іншого файлу правил |
 | [claude-code/](claude-code/INSTALL.md) | хук `PostToolUse`, налаштування, інструкція (Claude Code і Cline) |
 | [AGENTS.md](AGENTS.md) | контракт для тих, хто правитиме репозиторій |
-| [scripts/validate.mjs](scripts/validate.mjs) | перевірки узгодженості перед публікацією |
+| [dev/validate.mjs](dev/validate.mjs) | перевірки узгодженості перед публікацією |
 
 Окремих інструментів для людей немає навмисно: перевірку робить сам агент
 за правилами скіла, а в проєктах із хуком ще й автоматично після кожного
@@ -152,7 +152,7 @@ cp -r tatet-humanizer/SKILL.md tatet-humanizer/references <тека>/tatet-human
 ## Розробка
 
 ```bash
-node scripts/validate.mjs
+node dev/validate.mjs
 ```
 
 Перевіряє frontmatter, збіг версій із маніфестами, наявність 33 міток

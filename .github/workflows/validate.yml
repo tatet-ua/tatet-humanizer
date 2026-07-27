@@ -16,7 +16,7 @@ jobs:
           node-version: '20'
 
       - name: Перевірки узгодженості пакета
-        run: node scripts/validate.mjs
+        run: node dev/validate.mjs
 
       - name: Хук мовчить на власній документації
         run: |
